@@ -46,4 +46,14 @@ set_target_properties(libgmock PROPERTIES
     "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
 )
 
-include_directories("${source_dir}/include")
+file(GLOB SRCS *.cpp)
+
+ADD_EXECUTABLE(${APP_NAME}_test ${SRCS})
+
+TARGET_LINK_LIBRARIES(${APP_NAME}_test
+    libgtest
+    libgmock
+)
+
+add_test(NAME ${APP_NAME}_test
+         COMMAND ${APP_NAME}_test)
